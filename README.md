@@ -1,0 +1,1 @@
+# depromeet-svg-sample
