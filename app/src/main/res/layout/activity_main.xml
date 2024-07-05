@@ -37,7 +37,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:hint="send something..."
-        app:layout_constraintBottom_toTopOf="@+id/btnSendToWeb"
+        app:layout_constraintBottom_toTopOf="@+id/btnSendGray"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -60,12 +60,21 @@
         app:layout_constraintTop_toTopOf="@+id/btnZoomIn" />
 
     <Button
-        android:id="@+id/btnSendToWeb"
-        android:layout_width="0dp"
+        android:id="@+id/btnSendRed"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Send to Web"
+        android:text="Red"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btnSendGray"/>
+
+    <Button
+        android:id="@+id/btnSendGray"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Gray"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toEndOf="@id/btnSendRed"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

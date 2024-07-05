@@ -79,7 +79,6 @@ fun getHTMLBody(svgString: String) = "<!DOCTYPE HTML>\n" +
         "</head>\n" +
         "\n" +
         "<body>\n" +
-        "    <h3 id=\"l_value\">WebView</h3>\n" +
         "    <div id=\"div\" class=\"container\">\n" +
         "\t\n" +
         svgString +

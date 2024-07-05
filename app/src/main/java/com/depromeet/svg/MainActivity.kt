@@ -25,6 +25,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var pd: ProgressDialog
     private lateinit var binding: ActivityMainBinding
 
+    private var duplicationFlag: String = ""
+
     private fun initProgressDialog() {
         pd = ProgressDialog(this)
         pd.setCancelable(false)
@@ -45,13 +47,39 @@ class MainActivity : AppCompatActivity() {
         initProgressDialog()
         binding.btnZoomIn.setOnClickListener { binding.webView.zoomIn() }
         binding.btnZoomOut.setOnClickListener { binding.webView.zoomOut() }
-        binding.btnSendToWeb.setOnClickListener {
-            binding.webView.evaluateJavascript(
-                "javascript: " +
-                        "updateFromAndroid(\"" + binding.etSendDataField.text + "\")",
-                null
-            )
+
+        binding.btnSendGray.setOnClickListener {
+            if (duplicationFlag == "gray") {
+                duplicatedUpdateToWeb()
+                duplicationFlag = ""
+            } else{
+                updateToWeb("gray")
+                duplicationFlag = "gray"
+            }
         }
+        binding.btnSendRed.setOnClickListener {
+            if (duplicationFlag == "red") {
+                duplicatedUpdateToWeb()
+                duplicationFlag = ""
+            } else {
+                updateToWeb("red")
+                duplicationFlag = "red"
+            }
+        }
+    }
+
+    private fun duplicatedUpdateToWeb() {
+        binding.webView.evaluateJavascript(
+            "javascript: " +
+                    "updateFromAndroid(\"" + "duplicate" + "\")", null
+        )
+    }
+
+    private fun updateToWeb(color: String) {
+        binding.webView.evaluateJavascript(
+            "javascript: " +
+                    "updateFromAndroid(\"" + "$color" + "\")", null
+        )
     }
 
     override fun onResume() {
@@ -60,7 +88,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun callVM() {
-        val url = "https://svgshare.com/i/17jn.svg"
+        val url = "https://svgshare.com/i/17tZ.svg"
         try {
             viewModel.downloadFileFromServer(url)
                 .observe(this, Observer { responseBody ->
@@ -108,7 +136,6 @@ class MainActivity : AppCompatActivity() {
         @SuppressLint("SetTextI18n")
         @JavascriptInterface
         fun textFromWeb(fromWeb: String) {
-            Log.e("bbb","fromWeb : ${fromWeb}")
             runOnUiThread {
                 binding.tvStateName.text = fromWeb
             }
